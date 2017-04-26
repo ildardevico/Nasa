@@ -2,6 +2,7 @@ import Koa from 'koa'
 import BodyParser from 'koa-bodyparser'
 import cluster from 'cluster'
 import os from 'os'
+import { configurePublic } from './controllers';
 import config from './config'
 
 if (cluster.isMaster) {
@@ -17,7 +18,7 @@ if (cluster.isMaster) {
   const app = new Koa
 
   app.use(BodyParser())
-
+  app.use(configurePublic())
   //Only for developer needs. On production use nginx for this purposes
   config.debug && app.use((ctx, next) => {
     ctx.response.set('Access-Control-Allow-Origin', ctx.get('Origin'))
