@@ -5,7 +5,7 @@ const sateliteSchama = new Schema({
   longitude: Number,
   brighness: Number,
   acq_date: Date,
-  acq_time: Date,
+  acq_time: Number,
   scan: Number,
   track: Number,
   satellite: String,

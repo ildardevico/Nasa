@@ -11,12 +11,12 @@
   "license": "ISC",
   "dependencies": {
     "babel-cli": "^6.24.1",
+    "babel-core": "^6.24.1",
     "babel-eslint": "^7.2.3",
     "babel-loader": "^7.0.0",
-    "babel-preset-nodejs6": "^2.0.0",
     "babel-preset-react": "^6.24.1",
-    "babel-preset-stage-1": "^6.24.1",
     "bcrypt": "^1.0.2",
+    "csv": "^1.1.1",
     "eslint": "^3.19.0",
     "jsonwebtoken": "^7.4.0",
     "koa": "^2.2.0",
@@ -25,5 +25,21 @@
     "koa-router": "^7.1.1",
     "mongoose": "^4.9.6",
     "nodemon": "^1.11.0"
+  },
+  "babel": {
+    "presets": [
+      [
+        "env",
+        {
+          "targets": {
+            "node": "current"
+          }
+        }
+      ],
+      "react"
+    ]
+  },
+  "devDependencies": {
+    "babel-preset-env": "^1.4.0"
   }
 }
