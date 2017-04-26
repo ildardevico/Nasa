@@ -1,0 +1,28 @@
+{
+  "name": "nasa",
+  "version": "1.0.0",
+  "description": "Fire fighters",
+  "main": "index.js",
+  "scripts": {
+    "start": "./node_modules/.bin/nodemon ./src/app.js --exec ./node_modules/.bin/babel-node",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-eslint": "^7.2.3",
+    "babel-loader": "^7.0.0",
+    "babel-preset-nodejs6": "^2.0.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-1": "^6.24.1",
+    "bcrypt": "^1.0.2",
+    "eslint": "^3.19.0",
+    "jsonwebtoken": "^7.4.0",
+    "koa": "^2.2.0",
+    "koa-bodyparser": "^4.2.0",
+    "koa-jwt": "^3.2.1",
+    "mongoose": "^4.9.6",
+    "nodemon": "^1.11.0"
+  }
+}
