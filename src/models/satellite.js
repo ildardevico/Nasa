@@ -1,10 +1,10 @@
-import mongoose, { Schema } from 'mongoose';
+import mongoose, { Schema } from 'mongoose'
 
-const sateliteSchama = new Schema({
+const satelliteSchama = new Schema({
   latitude:  Number,
   longitude: Number,
-  brighness: Number,
-  acq_date: Date,
+  brightness: Number,
+  acq_date: String,
   acq_time: Number,
   scan: Number,
   track: Number,
@@ -14,6 +14,6 @@ const sateliteSchama = new Schema({
   bright_t31: Number,
   frp: Number,
   daynight: String,
-});
+})
 
-export default mongoose.model('Satelite', sateliteSchama);
+export default mongoose.model('Satellite', satelliteSchama)

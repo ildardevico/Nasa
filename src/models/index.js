@@ -1,7 +1,7 @@
-import mongoose from 'mongoose';
-import Satelite from './satelite';
-mongoose.connect('mongodb://localhost/nasa');
+import mongoose from 'mongoose'
+import Satellite from './satellite'
+mongoose.connect('mongodb://localhost/nasa')
 
 export {
-    Satelite,
+  Satellite,
 }

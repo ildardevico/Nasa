@@ -2,7 +2,7 @@ import Koa from 'koa'
 import BodyParser from 'koa-bodyparser'
 import cluster from 'cluster'
 import os from 'os'
-import { configurePublic } from './controllers';
+import { configurePublic } from './controllers'
 import config from './config'
 
 if (cluster.isMaster) {
