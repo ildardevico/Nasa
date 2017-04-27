@@ -14,6 +14,7 @@ const satelliteSchama = new Schema({
   bright_t31: Number,
   frp: Number,
   daynight: String,
+  weather: Schema.Types.Mixed
 })
 
 export default mongoose.model('Satellite', satelliteSchama)
