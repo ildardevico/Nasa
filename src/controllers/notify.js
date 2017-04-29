@@ -4,9 +4,15 @@ import config from '../config'
 import Notify from '../models'
 import { PENDING, IN_PROGRESS, RESOLVED } from '../models/notify'
 
+const getByLocation = async ctx => {
+  const { longitude, latitude } = ctx.request.body
+  ctx.response.body = {
+    notifies: await Notify.find({ longitude, latitude }),
+  }
+}
+
 const create = async ctx => {
   const { latitude, longitude } = ctx.request.body
-  console.log(ctx.request.files)
   const { weather: { endpoint, apiKey } } = config
   const weather = await rp({
     uri: `${endpoint}/weather`,
@@ -54,8 +60,9 @@ const resolve = async ctx => {
 
 export default function configureNotify() {
   const router = Router()
+  router.get('/notify', getByLocation)
   router.post('/notify', create)
   router.patch('/notify/:id', approve)
-  router.pus('/notify/:id', resolve)
+  router.put('/notify/:id', resolve)
   return router.routes()
 }

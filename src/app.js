@@ -17,7 +17,10 @@ if (cluster.isMaster) {
 } else {
   const app = new Koa
 
-  app.use(BodyParser())
+  app.use(BodyParser({
+    formidable: { uploadDir: './images' },
+    multipart: true,
+  }))
   app.use(configurePublic())
   //Only for developer needs. On production use nginx for this purposes
   config.debug && app.use((ctx, next) => {

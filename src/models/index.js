@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import Notify from './satellite'
+import Notify from './notify'
 mongoose.connect('mongodb://localhost/nasa')
 mongoose.Promise = global.Promise
 
