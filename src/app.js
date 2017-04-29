@@ -17,15 +17,12 @@ if (cluster.isMaster) {
 } else {
   const app = new Koa
 
-  app.use(BodyParser({
-    formidable: { uploadDir: './images' },
-    multipart: true,
-  }))
+  app.use(BodyParser())
   app.use(configurePublic())
   //Only for developer needs. On production use nginx for this purposes
   config.debug && app.use((ctx, next) => {
     ctx.response.set('Access-Control-Allow-Origin', ctx.get('Origin'))
-    ctx.response.set('Access-Control-Allow-Methods', 'GET,HEAD,PUT,POST,DELETE,PATCH')
+    ctx.response.set('Access-Control-Allow-Methods', 'GET, HEAD, PUT, POST, DELETE, PATCH')
     ctx.response.set('Access-Control-Allow-Headers', 'Authorization, Content-Type')
     if (ctx.method == 'OPTIONS') {
       ctx.response.status = 204

@@ -15,6 +15,9 @@ const notify = new Schema({
   category: Number,
   used: Boolean,
   location: Schema.Types.Mixed,
+  victim: Number,
 })
+
+notify.index({ location: '2dsphere' })
 
 export default mongoose.model('Notify', notify)

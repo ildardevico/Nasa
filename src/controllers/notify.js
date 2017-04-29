@@ -1,21 +1,21 @@
 import Router from 'koa-router'
 import rp from 'request-promise'
 import config from '../config'
-import Notify from '../models'
+import { Notify } from '../models'
 import { PENDING, IN_PROGRESS, RESOLVED } from '../models/notify'
 
 const getByLocation = async ctx => {
-  const { longitude, latitude } = ctx.request.body
+  const { longitude, latitude } = ctx.request.query
   ctx.response.body = {
     notifies: await Notify.find({
       location: {
         $near: {
           $geometry: {
             type: 'Point' ,
-            coordinates: [ longitude , latitude ]
+            coordinates: [ +longitude , +latitude ]
           },
-          $maxDistance: 0,
-          $minDistance: 10000,
+          $maxDistance: 10000,
+          $minDistance: 0,
         }
       }
     }),
@@ -26,13 +26,13 @@ const create = async ctx => {
   const { latitude, longitude } = ctx.request.body
   const { weather: { endpoint, apiKey } } = config
   const weather = await rp({
-    uri: `${endpoint}/weather`,
+    uri: endpoint,
     qs: {
       lat: latitude,
-      long: longitude,
+      lon: longitude,
       appid: apiKey,
     }
-  })
+  }).catch(console.error)
   const notify = await new Notify({
     latitude,
     longitude,
@@ -40,8 +40,8 @@ const create = async ctx => {
     weather,
     date: new Date(),
     location: {
-      x: longitude,
-      y: latitude,
+      x: +longitude,
+      y: +latitude,
     }
   }).save()
   ctx.response.body = {
@@ -50,8 +50,8 @@ const create = async ctx => {
 }
 
 const approve = async ctx => {
-  const { id } = ctx.request.params
-  const notify = await Notify.findOne({ id })
+  const { id } = ctx.params
+  const notify = await Notify.findOne({ _id: id })
   notify.status = IN_PROGRESS
   await notify.save()
   ctx.response.body = {
@@ -60,9 +60,9 @@ const approve = async ctx => {
 }
 
 const resolve = async ctx => {
-  const { id } = ctx.request.params
+  const { id } = ctx.params
   const { category, victim } = ctx.request.body
-  const notify = await Notify.find({ id })
+  const notify = await Notify.findOne({ _id: id })
   notify.status = RESOLVED
   notify.category = category
   notify.victim = victim
