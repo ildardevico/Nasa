@@ -1,8 +1,8 @@
 import mongoose from 'mongoose'
-import Satellite from './satellite'
+import Notify from './satellite'
 mongoose.connect('mongodb://localhost/nasa')
 mongoose.Promise = global.Promise
 
 export {
-  Satellite,
+  Notify,
 }

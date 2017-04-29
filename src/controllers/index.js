@@ -1,8 +1,8 @@
 import Router from 'koa-router'
-import configureSatellite from './satellite'
+import configureNotify from './notify'
 
-export function configurePublic(): Array<Function> {
+export function configurePublic() {
   const publicRouter = Router()
-  publicRouter.use(configureSatellite())
+  publicRouter.use(configureNotify())
   return publicRouter.routes()
 }
