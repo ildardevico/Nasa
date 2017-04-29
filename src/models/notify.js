@@ -12,6 +12,9 @@ const notify = new Schema({
   status: Number,
   weather: Schema.Types.Mixed,
   photo: Schema.Types.Mixed,
+  category: Number,
+  used: Boolean,
+  location: Schema.Types.Mixed,
 })
 
 export default mongoose.model('Notify', notify)
