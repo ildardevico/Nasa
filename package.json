@@ -30,7 +30,9 @@
     "mongoose": "^4.9.6",
     "nodemon": "^1.11.0",
     "request": "^2.81.0",
-    "request-promise": "^4.2.0"
+    "request-promise": "^4.2.0",
+    "winston": "^2.3.1",
+    "winston-koa-logger": "0.0.2"
   },
   "babel": {
     "presets": [

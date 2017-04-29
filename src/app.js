@@ -2,6 +2,8 @@ import Koa from 'koa'
 import BodyParser from 'koa-bodyparser'
 import cluster from 'cluster'
 import os from 'os'
+import winstonKoaLogger from 'winston-koa-logger'
+import logger from 'winston'
 import { configurePublic } from './controllers'
 import config from './config'
 
@@ -16,11 +18,10 @@ if (cluster.isMaster) {
   })
 } else {
   const app = new Koa
+  app.use(winstonKoaLogger(logger))
 
   app.use(BodyParser())
-  app.use(configurePublic())
-  //Only for developer needs. On production use nginx for this purposes
-  config.debug && app.use((ctx, next) => {
+  app.use((ctx, next) => {
     ctx.response.set('Access-Control-Allow-Origin', ctx.get('Origin'))
     ctx.response.set('Access-Control-Allow-Methods', 'GET, HEAD, PUT, POST, DELETE, PATCH')
     ctx.response.set('Access-Control-Allow-Headers', 'Authorization, Content-Type')
@@ -30,6 +31,8 @@ if (cluster.isMaster) {
       return next()
     }
   })
+
+  app.use(configurePublic())
 
   app.use(ctx => {
     ctx.response.status = 404

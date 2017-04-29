@@ -6,6 +6,7 @@ import { PENDING, IN_PROGRESS, RESOLVED } from '../models/notify'
 
 const getByLocation = async ctx => {
   const { longitude, latitude } = ctx.request.query
+  console.log(longitude, latitude)
   ctx.response.body = {
     notifies: await Notify.find({
       location: {
@@ -14,7 +15,7 @@ const getByLocation = async ctx => {
             type: 'Point' ,
             coordinates: [ +longitude , +latitude ]
           },
-          $maxDistance: 10000,
+          $maxDistance: 1000000,
           $minDistance: 0,
         }
       }
@@ -40,8 +41,8 @@ const create = async ctx => {
     weather,
     date: new Date(),
     location: {
-      x: +longitude,
-      y: +latitude,
+      x: +latitude,
+      y: +longitude,
     }
   }).save()
   ctx.response.body = {
