@@ -14,6 +14,8 @@ const trainNeuralNetwork = async () => {
         output: { category, resolveTime }
       }
     ])
+    notify.used = true
+    await notify.save()
   }
 }
 
